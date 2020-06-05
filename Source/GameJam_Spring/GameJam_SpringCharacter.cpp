@@ -86,7 +86,7 @@ void AGameJam_SpringCharacter::LookUpAtRate(float Rate)
 
 void AGameJam_SpringCharacter::MoveForward(float Value)
 {
-	/*if ((Controller != NULL) && (Value != 0.0f))
+	if ((Controller != NULL) && (Value != 0.0f))
 	{
 		// find out which way is forward
 		const FRotator Rotation = Controller->GetControlRotation();
@@ -96,12 +96,12 @@ void AGameJam_SpringCharacter::MoveForward(float Value)
 		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
 		AddMovementInput(Direction, Value);
 	}
-	*/
+	
 }
 
 void AGameJam_SpringCharacter::MoveRight(float Value)
 {
-	/*if ( (Controller != NULL) && (Value != 0.0f) )
+	if ( (Controller != NULL) && (Value != 0.0f) )
 	{
 		
 
@@ -114,5 +114,5 @@ void AGameJam_SpringCharacter::MoveRight(float Value)
 		// add movement in that direction
 		AddMovementInput(Direction, Value);
 	}
-	*/
+	
 }
