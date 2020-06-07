@@ -19,6 +19,10 @@ AGameJam_SpringCharacter::AGameJam_SpringCharacter()
 	// set our turn rates for input
 	BaseTurnRate = 45.f;
 	BaseLookUpRate = 45.f;
+	XSensitivity = 1.f;
+	YSensitivity = 1.f;
+
+
 
 	// Don't rotate when the controller rotates. Let that just affect the camera.
 	bUseControllerRotationPitch = false;
@@ -62,9 +66,9 @@ void AGameJam_SpringCharacter::SetupPlayerInputComponent(class UInputComponent* 
 	// We have 2 versions of the rotation bindings to handle different kinds of devices differently
 	// "turn" handles devices that provide an absolute delta, such as a mouse.
 	// "turnrate" is for devices that we choose to treat as a rate of change, such as an analog joystick
-	PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
+	PlayerInputComponent->BindAxis("Turn", this, &AGameJam_SpringCharacter::Turn);
 	PlayerInputComponent->BindAxis("TurnRate", this, &AGameJam_SpringCharacter::TurnAtRate);
-	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
+	PlayerInputComponent->BindAxis("LookUp", this, &AGameJam_SpringCharacter::LookUp);
 	PlayerInputComponent->BindAxis("LookUpRate", this, &AGameJam_SpringCharacter::LookUpAtRate);
 	
 }
@@ -75,13 +79,23 @@ void AGameJam_SpringCharacter::SetupPlayerInputComponent(class UInputComponent* 
 void AGameJam_SpringCharacter::TurnAtRate(float Rate)
 {
 	// calculate delta for this frame from the rate information
-	AddControllerYawInput(Rate * BaseTurnRate * GetWorld()->GetDeltaSeconds());
+	AddControllerYawInput(Rate * BaseTurnRate * XSensitivity * GetWorld()->GetDeltaSeconds());
 }
 
 void AGameJam_SpringCharacter::LookUpAtRate(float Rate)
 {
 	// calculate delta for this frame from the rate information
-	AddControllerPitchInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
+	AddControllerPitchInput(Rate * BaseLookUpRate * YSensitivity * GetWorld()->GetDeltaSeconds());
+}
+
+void AGameJam_SpringCharacter::Turn(float Value)
+{
+	AddControllerYawInput(Value * XSensitivity * GetWorld()->GetDeltaSeconds());
+}
+
+void AGameJam_SpringCharacter::LookUp(float Value)
+{
+	AddControllerPitchInput(Value * YSensitivity * GetWorld()->GetDeltaSeconds());
 }
 
 void AGameJam_SpringCharacter::MoveForward(float Value)

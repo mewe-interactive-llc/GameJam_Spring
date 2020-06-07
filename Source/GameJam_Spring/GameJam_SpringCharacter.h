@@ -29,6 +29,13 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
 	float BaseLookUpRate;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Camera)
+	float XSensitivity;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Camera)
+	float YSensitivity;
+
+
 	
 
 
@@ -56,6 +63,9 @@ protected:
 	 * @param Rate	This is a normalized rate, i.e. 1.0 means 100% of desired turn rate
 	 */
 	void LookUpAtRate(float Rate);
+
+	void Turn(float Value);
+	void LookUp(float Value);
 
 	/** Handler for when a touch input begins. */
 	
