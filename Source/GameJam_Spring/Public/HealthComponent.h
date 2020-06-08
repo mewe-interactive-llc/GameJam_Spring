@@ -48,6 +48,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Shields")
 		float StartingShield;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
+	float CurrentHealth;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Shields")
+	float CurrentShield;
+
 
 
 	UFUNCTION(BlueprintPure, Category = "Health")
@@ -71,8 +77,7 @@ public:
 
 
 private:
-	float CurrentHealth;
-	float CurrentShield;
+	
 
 	UFUNCTION()
 		void OnPlayerTakeDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser);
